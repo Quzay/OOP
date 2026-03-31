@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ anime.title }} | Episodes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0b0f1a; color: #e2e8f0; }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .episode-row:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid #38bdf8;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-10">
+    <div class="max-w-5xl mx-auto">
+        
+        <div class="glass rounded-3xl p-6 mb-10 flex flex-col md:flex-row gap-8 items-center shadow-2xl">
+            <img src="{{ anime.images.jpg.large_image_url }}" 
+                 alt="Poster" 
+                 class="w-64 rounded-2xl shadow-lg border-2 border-slate-700">
+            
+            <div class="text-center md:text-left">
+                <h1 class="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500 mb-4">
+                    {{ anime.title }}
+                </h1>
+                <p class="text-slate-400 text-lg mb-4 max-w-xl">
+                    {{ anime.synopsis[:250] }}...
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                    <span class="px-4 py-1 rounded-full bg-slate-800 border border-slate-700 text-sm italic">
+                        Rating: {{ anime.rating }}
+                    </span>
+                    <span class="px-4 py-1 rounded-full bg-sky-500/20 text-sky-400 border border-sky-500/30 text-sm font-bold">
+                        Score: ⭐ {{ anime.score }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass rounded-2xl overflow-hidden">
+            <div class="bg-white/5 px-6 py-4 border-b border-white/5">
+                <h3 class="text-xl font-bold uppercase tracking-wider text-slate-300">Список серій</h3>
+            </div>
+            
+            <div class="divide-y divide-white/5">
+                {% for ep in episodes %}
+                <div class="episode-row px-6 py-4 flex justify-between items-center transition-all duration-200">
+                    <div class="flex items-center gap-4">
+                        <span class="text-2xl font-mono text-slate-600 font-bold">
+                            {{ "%02d" | format(ep.mal_id) }}
+                        </span>
+                        <div>
+                            <p class="font-semibold text-slate-200">{{ ep.title }}</p>
+                            <p class="text-xs text-slate-500 italic">{{ ep.aired[:10] if ep.aired else 'Дата невідома' }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-2">
+                        {% if ep.score %}
+                        <span class="text-yellow-500 font-bold">★ {{ ep.score }}</span>
+                        {% else %}
+                        <span class="text-slate-700">no score</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <footer class="mt-10 text-center text-slate-600 text-sm">
+            Powered by Jikan API & Flask | <span class="text-sky-900">Arch Linux Omarchy Style</span>
+        </footer>
+    </div>
+</body>
+</html>
