@@ -1,2 +1,9 @@
 title: Portfolio Example
 description: Shows how to create portfolio for students.
+theme: jekyll-theme-midnight
+
+author:
+  name: Ваше Ім'я
+  github: your-username
+
+show_downloads: true
