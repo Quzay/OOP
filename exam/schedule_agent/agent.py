@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional
-from google.adk.agents.llm_agent import Agent
+#from google.adk.agents.llm_agent import Agent
 
 
 # ============================================================================
@@ -99,7 +99,7 @@ def get_transport_schedule(route_number: str) -> Dict:
 # AI АГЕНТ З ПРОМПТОМ
 # ============================================================================
 
-root_agent = Agent(
+#root_agent = Agent(
     model='gemini-2.5-flash',
     name='root_agent',
     description='Помічник з громадського транспорту.',
@@ -111,5 +111,5 @@ root_agent = Agent(
         'Якщо маршрут не знайдено — відповідай коротко: «Маршрут не знайдено». Для інших запитів поводься як звичайний помічник.'
     ),
     tools=[get_transport_schedule]
-)
+#)
 
