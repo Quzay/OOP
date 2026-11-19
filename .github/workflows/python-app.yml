@@ -33,7 +33,7 @@ jobs:
 
     - name: Run pytest
       run: |
-        cd Testing/lab_1 && pytest -v && cd ../..
-        cd Testing/lab_2 && pytest -v && cd ../..
-        cd Testing/lab_3 && pytest -v && cd ../..
-        cd Testing/lab_4 && pytest -v && cd ../..
+        (cd Testing/lab_1 && pytest test_vowels.py -v)
+        (cd Testing/lab_2 && pytest test_app.py -v)
+        (cd Testing/lab_3 && pytest test_app.py -v)
+        (cd Testing/lab_4 && pytest test_app.py -v)
